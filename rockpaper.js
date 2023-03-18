@@ -1,5 +1,5 @@
 function getComputerChoice (){
-    choice_list = ["ROCK", "PAPER", "SCISSORS"]; // create a list of possible choice
+    choice_list = ["ROCK", "PAPER", "SCISSORS"]; /* create a list of possible choice*/
     var computerChoice;
     r_pick = math.random();
     if (r_pick <= 1/3){
