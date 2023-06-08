@@ -1,0 +1,93 @@
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.options {
+    display: flex;
+    flex: 1;
+    height: 200px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#ROCK, #PAPER, #SCISSORS {
+    display: flex;
+    flex: 1;
+    align-self: auto;
+    border: solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 4rem;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: white;
+}
+
+
+#refresh {
+    visibility: hidden;
+    align-self: auto;
+    border: solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background: yellow;
+}
+
+
+.playing {
+    transition: transform 0.4s;  
+    transform: scale(1.05);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+#score {
+    display: flex;
+    align-self: auto;
+    border: solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 2rem;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: green;
+}
+
+#result {
+    visibility: hidden;
+    display: flex;
+    align-self: auto;
+    border: solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 2rem;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: green;
+}
+
+#final.show {
+    display: flex;
+    align-self: auto;
+    border: solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: red;
+}

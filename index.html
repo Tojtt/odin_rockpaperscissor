@@ -1,9 +1,49 @@
 <head>
     <!-- import math library in -->
     <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>  
+    <link rel="stylesheet" href="style.css">
 </head>
 
+
+
+<body>
+    <div id="score">
+        <p></p>
+    </div>
+
+    <div id="result">
+        <p></p>
+    </div>
+    <div class="options">
+        <button id ="ROCK" class = "choice" onclick = "playRound(this.id); popButton(this.id)">
+            <p>ROCK</p>
+        </button>
+        <button id ="PAPER" class = "choice" onclick = "playRound(this.id); popButton(this.id)">
+            <p>PAPER</p>
+        </button>
+        <button id ="SCISSORS" class = "choice" onclick = "playRound(this.id); popButton(this.id)">
+            <p>SCISSORS</p>
+        </button>
+    </div>
+    <div id="final"> </div>
+    <button id ="refresh" onclick = "window.location.reload();">
+        NEW GAME
+    </button>
+
+</body>
+
 <script>
+
+    function popButton(classname){
+        if(score_player == 5 || score_comp == 5){
+            return;
+        }
+        var button = document.getElementById(classname);
+        button.classList.add("playing");
+        setTimeout(() => {
+            button.classList.remove("playing");
+        }, 400); 
+    }
 
     function getComputerChoice (){
         choice_list = ["ROCK", "PAPER", "SCISSORS"]; // create a list of possible choice
@@ -16,52 +56,50 @@
         } else {
             computerChoice = choice_list[2];
         }
-        console.log(computerChoice);
         return computerChoice;
     }
 
-    function playRound(playerSelection, computerSelection) {
-        playerSelection = playerSelection.toUpperCase();
+    function playRound(playerChoice) {
+        if(score_player == 5 || score_comp == 5){
+            return;
+        }
+        let playerSelection = playerChoice;
+        let computerSelection = getComputerChoice();
+        
         choice_list = ["ROCK", "PAPER", "SCISSORS"];
         let index_comp = choice_list.indexOf(computerSelection);
         let index_player = choice_list.indexOf(playerSelection);
+        document.getElementById("result").style.visibility = "visible";
         if (index_comp == index_player){
-            return console.log("You Draw! Both of you chose ", choice_list[index_comp]);
+            document.getElementById("result").innerHTML = "You Draw! Both of you chose "+ choice_list[index_comp];
         } 
         if ((index_comp - index_player) == 1 || (index_comp - index_player) == -2){
             score_comp++;
-            return console.log("You Lose! ", choice_list[index_comp], " beats ", choice_list[index_player]);
+            document.getElementById("result").innerHTML = "You Lose! "+ choice_list[index_comp]+ " beats "+ choice_list[index_player];
+            document.getElementById("score").innerHTML = "You: " + score_player +" Computer: " + score_comp;
         }
         if ((index_comp - index_player) == -1 || (index_comp - index_player) == 2){
             score_player++;
-            return console.log("You Won! ", choice_list[index_player], " beats ", choice_list[index_comp]);
+            document.getElementById("result").innerHTML = "You Won! " + choice_list[index_player] + " beats " + choice_list[index_comp];
+            document.getElementById("score").innerHTML = "You: " + score_player +" Computer: " + score_comp;
+        }
+        if (score_player == 5){
+            document.getElementById("final").classList.add("show");
+            document.getElementById("final").innerHTML = "Congratulations! You are the Winner!";
+            document.getElementById("refresh").style.visibility = "visible";
+        }
+        if (score_comp == 5){
+            document.getElementById("final").classList.add("show");
+            document.getElementById("final").innerHTML = "The Computer has Won! Good luck next time!";
+            document.getElementById("refresh").style.visibility = "visible";
         }
     }
 
-    function game(){
-        choice_list = ["ROCK", "PAPER", "SCISSORS"];
-        for (let i = 0; i < 5; i++){
-            let playerSelection = prompt("Please enter valid choice between Rock, Paper, or Scissor:");
-                while (!(choice_list.indexOf(playerSelection.toUpperCase()) >= 0)){
-                    playerSelection = prompt("Please enter valid choice between Rock, Paper, or Scissor:")
-                } 
-            let computerSelection = getComputerChoice();
-            playRound(playerSelection, computerSelection);
-            console.log("Current Score: Player ", score_player, ", Computer: ", score_comp)
-        }
-        if (score_player > score_comp){
-            return console.log("You Win!"," Final Score: Player ", score_player, ", Computer: ", score_comp)
-        }
-
-        if (score_player < score_comp){
-            return console.log("You Lose!", " Final Score: Player ", score_player, ", Computer: ", score_comp)
-        }
-
-        if (score_player == score_comp){
-            return console.log("You Tied with Comptuter!"," Final Score: Player ", score_player, ", Computer: ", score_comp)
-        }
-    }
+    
     var score_player = 0;
     var score_comp = 0;
-    game();
+    document.getElementById("score").innerHTML = "You: " + score_player +" Computer: " + score_comp;
+    
+
+    
 </script>
